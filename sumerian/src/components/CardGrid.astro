@@ -1,0 +1,14 @@
+---
+const { items = [], type = 'article' } = Astro.props;
+---
+<div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+  {items.map((item) => (
+    <article class="card p-5">
+      <div class="mb-4 flex h-36 items-center justify-center rounded-xl bg-gradient-to-br from-white/10 to-white/[0.02] text-5xl" aria-hidden="true">⌁</div>
+      <div class="mb-3 flex flex-wrap gap-2"><span class="badge">{item.data?.category || item.category}</span>{item.data?.readingTime && <span class="badge">{item.data.readingTime}</span>}</div>
+      <h3 class="text-xl font-bold text-white">{item.data?.title || item.title}</h3>
+      <p class="mt-3 text-sm leading-6 text-slate-400">{item.data?.summary || item.description}</p>
+      <a class="mt-5 inline-flex text-sm font-semibold text-accent-cyan hover:text-white" href={type === 'course' ? item.url : `/${type}/${item.slug}`}>{type === 'course' ? 'Watch Course' : 'Read More'} →</a>
+    </article>
+  ))}
+</div>

@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CardGrid from '../components/CardGrid.astro';
+import { getCollection } from 'astro:content';
+const research = await getCollection('research');
+---
+<BaseLayout title="Research | Sumerian"><section class="mx-auto max-w-7xl px-5 py-16"><h1 class="text-4xl font-black">Research & Writeups</h1><p class="mt-4 text-slate-400">Professional research on cybersecurity, AI security, governance, threat intelligence, privacy, and emerging technologies.</p><div class="mt-8"><CardGrid items={research} type="research" /></div></section></BaseLayout>

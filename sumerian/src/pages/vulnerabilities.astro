@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+const cves = await getCollection('cves');
+---
+<BaseLayout title="Latest Vulnerabilities | Sumerian"><section class="mx-auto max-w-7xl px-5 py-16"><h1 class="text-4xl font-black">Latest Vulnerabilities</h1><p class="mt-4 text-slate-400">Safe theoretical CVE explanations with impact, mitigation, and trusted source links.</p><div class="mt-8 grid gap-5 md:grid-cols-2">{cves.map(c => <article class="card p-5"><div class="flex flex-wrap gap-2"><span class="badge">{c.data.cve}</span><span class="badge">{c.data.severity}</span><span class="badge">CVSS {c.data.cvss}</span>{c.data.knownExploited && <span class="badge">Known Exploited</span>}</div><h2 class="mt-4 text-xl font-bold">{c.data.title}</h2><p class="mt-2 text-sm text-slate-400">{c.data.vendor} / {c.data.product} • {c.data.published}</p><p class="mt-4 text-sm leading-6 text-slate-400">{c.data.summary}</p><a class="mt-5 inline-flex text-accent-cyan" href={`/cves/${c.slug}`}>View Details →</a></article>)}</div></section></BaseLayout>

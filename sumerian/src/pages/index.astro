@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CardGrid from '../components/CardGrid.astro';
+import { getCollection } from 'astro:content';
+const articles = (await getCollection('articles')).slice(0,3);
+const research = (await getCollection('research')).slice(0,3);
+const courses = (await getCollection('courses')).filter(c => c.data.featured).slice(0,3).map(c => c.data);
+---
+<BaseLayout title="Sumerian | Cybersecurity • AI • Research • Learning">
+  <section class="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 lg:grid-cols-2">
+    <div>
+      <p class="badge w-fit">Non-profit Iraqi cybersecurity platform</p>
+      <h1 class="mt-6 text-5xl font-black tracking-tight text-white md:text-7xl">Sumerian</h1>
+      <p class="mt-5 text-xl text-slate-300">Cybersecurity • Artificial Intelligence • Research • Learning</p>
+      <p class="mt-6 max-w-2xl leading-8 text-slate-400">Sumerian is a non-profit Iraqi platform dedicated to improving cybersecurity awareness, education, governance, and technical research in Iraq. It supports students, researchers, and self-learners through free educational content and curated resources.</p>
+      <div class="mt-8 flex flex-wrap gap-3"><a class="btn-primary" href="/courses">Start Learning</a><a class="btn-secondary" href="/articles">Explore Articles</a></div>
+    </div>
+    <div class="card p-8">
+      <svg viewBox="0 0 520 420" role="img" aria-label="AI and cybersecurity illustration" class="w-full">
+        <defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#68e2d6"/><stop offset="1" stop-color="#7db7ff"/></linearGradient></defs>
+        <rect x="45" y="40" width="430" height="300" rx="28" fill="#111722" stroke="rgba(255,255,255,.12)"/>
+        <path d="M120 220c60-100 130-105 190-30s100 40 130-5" fill="none" stroke="url(#g)" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="170" cy="150" r="42" fill="rgba(104,226,214,.13)" stroke="#68e2d6"/><path d="M170 128v44m-22-22h44" stroke="#68e2d6" stroke-width="6" stroke-linecap="round"/>
+        <path d="M328 124l62 28v50c0 45-28 76-62 90-34-14-62-45-62-90v-50l62-28Z" fill="rgba(125,183,255,.10)" stroke="#7db7ff" stroke-width="5"/>
+        <circle cx="328" cy="200" r="17" fill="#68e2d6"/><path d="M328 217v35" stroke="#68e2d6" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
+  <section class="mx-auto max-w-7xl px-5 py-10">
+    <div class="grid gap-5 md:grid-cols-4">
+      {['Articles Published','Courses','Research Papers','Security Topics'].map((label, i) => <div class="card p-6"><div class="text-3xl font-black text-white">{[30,10,18,42][i]}+</div><p class="mt-2 text-sm text-slate-400">{label}</p></div>)}
+    </div>
+  </section>
+  <section class="mx-auto max-w-7xl px-5 py-16"><h2 class="mb-6 text-3xl font-bold">Featured Courses</h2><CardGrid items={courses} type="course" /></section>
+  <section class="mx-auto max-w-7xl px-5 py-16"><h2 class="mb-6 text-3xl font-bold">Latest Articles</h2><CardGrid items={articles} type="articles" /></section>
+  <section class="mx-auto max-w-7xl px-5 py-16"><h2 class="mb-6 text-3xl font-bold">Featured Research</h2><CardGrid items={research} type="research" /></section>
+</BaseLayout>

@@ -1,0 +1,14 @@
+---
+const nav = [ ['/', 'Home'], ['/courses', 'Courses'], ['/articles', 'Articles'], ['/vulnerabilities', 'Vulnerabilities'], ['/research', 'Research'] ];
+---
+<header class="sticky top-0 z-50 border-b border-white/10 bg-graphite-950/80 backdrop-blur-xl">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4" aria-label="Primary navigation">
+    <a href="/" class="flex items-center gap-3 font-bold text-white">
+      <span class="grid h-9 w-9 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10"><img src="/favicon.svg" alt="Sumerian logo" class="h-7 w-7" /></span>
+      <span>Sumerian</span>
+    </a>
+    <div class="hidden gap-6 md:flex">
+      {nav.map(([href, label]) => <a class="text-sm text-slate-300 hover:text-accent-cyan" href={href}>{label}</a>)}
+    </div>
+  </nav>
+</header>
