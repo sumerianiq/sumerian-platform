@@ -28,15 +28,17 @@ jobs:
           node-version: 24
 
       - name: Install dependencies
+        working-directory: ./sumerian
         run: npm install
 
       - name: Build
+        working-directory: ./sumerian
         run: npm run build
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./sumerian/dist
 
   deploy:
     environment:
